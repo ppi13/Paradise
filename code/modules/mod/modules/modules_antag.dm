@@ -149,19 +149,19 @@
 	mod.boots.flags ^= NOSLIP
 
 //Bite of 87 Springlock - Equips faster, disguised as DNA lock, can block retracting for 10 seconds.
-/obj/item/mod/module/springlock/bite_of_87
+/obj/item/mod/module/springlock/advanced
 	activation_step_time_booster = 10
-	nineteen_eighty_seven_edition = TRUE
-	dont_let_you_come_back = TRUE
+	advanced_springlock = TRUE
+	retraction_block = TRUE
 
-/obj/item/mod/module/springlock/bite_of_87/Initialize(mapload)
+/obj/item/mod/module/springlock/advanced/Initialize(mapload)
 	. = ..()
-	var/obj/item/mod/module/dna_lock/the_dna_lock_behind_the_slaughter = /obj/item/mod/module/dna_lock
-	name = initial(the_dna_lock_behind_the_slaughter.name)
-	desc = initial(the_dna_lock_behind_the_slaughter.desc)
-	icon_state = initial(the_dna_lock_behind_the_slaughter.icon_state)
-	complexity = initial(the_dna_lock_behind_the_slaughter.complexity)
-	use_power_cost = initial(the_dna_lock_behind_the_slaughter.use_power_cost)
+	var/obj/item/mod/module/dna_lock/dna_springlock = /obj/item/mod/module/dna_lock
+	name = initial(dna_springlock.name)
+	desc = initial(dna_springlock.desc)
+	icon_state = initial(dna_springlock.icon_state)
+	complexity = initial(dna_springlock.complexity)
+	use_power_cost = initial(dna_springlock.use_power_cost)
 
 /obj/item/mod/module/holster/hidden/Initialize(mapload)
 	. = ..()

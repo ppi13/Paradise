@@ -13,11 +13,11 @@
 	///How much faster will your suit deploy?
 	var/activation_step_time_booster = 2
 	///Is this the syndicate version, which can be toggled on multitool?
-	var/nineteen_eighty_seven_edition = FALSE
+	var/advanced_springlock = FALSE
 	///If this is true, the suit will prevent you from retracting for 10 seconds, so an antag can smoke bomb you.
-	var/dont_let_you_come_back = FALSE
+	var/retraction_block = FALSE
 	///If this is true, we are about to spring shut on someone, and should not remove the retraction blocking.
-	var/incoming_jumpscare = FALSE
+	var/wearer_exposed = FALSE
 
 /obj/item/mod/module/springlock/on_install()
 	mod.activation_step_time *= (1 / activation_step_time_booster)
@@ -27,7 +27,7 @@
 
 /obj/item/mod/module/springlock/on_suit_activation()
 	RegisterSignal(mod.wearer, COMSIG_ATOM_EXPOSE_REAGENTS, PROC_REF(on_wearer_exposed))
-	if(dont_let_you_come_back)
+	if(retraction_block)
 		RegisterSignal(mod, COMSIG_MOD_ACTIVATE, PROC_REF(on_activate_spring_block))
 		addtimer(CALLBACK(src, PROC_REF(remove_retraction_block)), 10 SECONDS)
 
@@ -35,15 +35,15 @@
 	UnregisterSignal(mod.wearer, COMSIG_ATOM_EXPOSE_REAGENTS)
 
 /obj/item/mod/module/springlock/multitool_act(mob/living/user, obj/item/I)
-	if(!nineteen_eighty_seven_edition)
+	if(!advanced_springlock)
 		return
 	. = TRUE
-	if(dont_let_you_come_back)
+	if(retraction_block)
 		to_chat(user, "<span class='notice'>You disable the retraction blocking systems.</span>")
-		dont_let_you_come_back = FALSE
+		retraction_block = FALSE
 		return
 	to_chat(user, "<span class='notice'>You enable the retraction blocking systems, which will block people from retracting the modsuit for 10 seconds.</span>")
-	dont_let_you_come_back = TRUE
+	retraction_block = TRUE
 
 
 ///Signal fired when wearer is exposed to reagents
@@ -51,7 +51,7 @@
 	SIGNAL_HANDLER
 	remove_retraction_block() //No double signals
 	to_chat(mod.wearer, "<span class='danger'>[src] makes an ominous click sound...</span>")
-	incoming_jumpscare = TRUE
+	wearer_exposed = TRUE
 	playsound(src, 'sound/items/modsuit/springlock.ogg', 75, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(snap_shut)), rand(3 SECONDS, 5 SECONDS))
 	RegisterSignal(mod, COMSIG_MOD_ACTIVATE, PROC_REF(on_activate_spring_block))
@@ -65,7 +65,7 @@
 
 ///Removes the retraction blocker from the springlock so long as they are not about to be killed
 /obj/item/mod/module/springlock/proc/remove_retraction_block()
-	if(!incoming_jumpscare)
+	if(!wearer_exposed)
 		UnregisterSignal(mod, COMSIG_MOD_ACTIVATE)
 
 ///Delayed death proc of the suit after the wearer is exposed to reagents
@@ -78,7 +78,7 @@
 	playsound(mod.wearer, 'sound/effects/snap.ogg', 75, TRUE, frequency = 0.5)
 	playsound(mod.wearer, 'sound/effects/splat.ogg', 50, TRUE, frequency = 0.5)
 	mod.wearer.adjustBruteLoss(1987) //boggers, bogchamp, etc //why not just poggers, also this caps at 595 damage but comedy
-	incoming_jumpscare = FALSE
+	wearer_exposed = FALSE
 
 ///Balloon Blower - Blows a balloon.
 /obj/item/mod/module/balloon

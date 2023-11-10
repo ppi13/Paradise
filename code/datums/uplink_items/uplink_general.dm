@@ -654,7 +654,7 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 		It is hidden as a DNA lock module. It will block retraction for 10 seconds by default to allow you to follow \
 		up with smoke, but you can multitool the module to disable that."
 	reference = "FNAF"
-	item = /obj/item/mod/module/springlock/bite_of_87
+	item = /obj/item/mod/module/springlock/advanced
 	cost = 5
 	surplus = 10
 
