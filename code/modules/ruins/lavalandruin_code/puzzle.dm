@@ -172,7 +172,7 @@
 	empty_tile_id = pick_n_take(left_ids)
 	var/turf/empty_tile_turf = get_turf_for_id(empty_tile_id)
 	empty_tile_turf.ChangeTurf(floor_type, keep_icon = FALSE, ignore_air = TRUE)
-	var/mutable_appearance/MA = new(puzzle_pieces["[empty_tile_id]"])
+	var/mutable_appearance/MA = new /mutable_appearance(puzzle_pieces["[empty_tile_id]"])
 	MA.layer = empty_tile_turf.layer + 0.1
 	empty_tile_turf.add_overlay(MA)
 
@@ -215,7 +215,7 @@
 		//Need to scale it down a bit to fit the static border
 		var/icon/C = new(puzzle_icon)
 		C.Scale(19,19)
-		var/mutable_appearance/puzzle_small = new(C)
+		var/mutable_appearance/puzzle_small = new /mutable_appearance(C)
 		puzzle_small.layer = layer + 0.1
 		puzzle_small.pixel_x = 7
 		puzzle_small.pixel_y = 7
@@ -230,7 +230,7 @@
 //Set the full image on the turf and delete yourself
 /obj/structure/puzzle_element/proc/collapse()
 	var/turf/T = get_turf(src)
-	var/mutable_appearance/MA = new(puzzle_icon)
+	var/mutable_appearance/MA = new /mutable_appearance(puzzle_icon)
 	MA.layer = T.layer + 0.1
 	T.add_overlay(MA)
 	//Some basic shaking animation

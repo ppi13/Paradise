@@ -1553,7 +1553,7 @@ GLOBAL_LIST_INIT(slot_equipment_priority, list( \
 
 		var/strength = round(rads / 1000, 0.1)
 		var/image/pic = image(loc = place)
-		var/mutable_appearance/MA = new()
+		var/mutable_appearance/MA = new /mutable_appearance
 		MA.maptext = MAPTEXT("[strength]k")
 		MA.color = "#04e604"
 		MA.layer = RAD_TEXT_LAYER

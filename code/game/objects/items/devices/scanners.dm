@@ -54,7 +54,7 @@ REAGENT SCANNER
 
 		if(O.invisibility == INVISIBILITY_MAXIMUM)
 			var/image/I = new(loc = get_turf(O))
-			var/mutable_appearance/MA = new(O)
+			var/mutable_appearance/MA = new /mutable_appearance(O)
 			MA.alpha = 128
 			MA.dir = O.dir
 			if(MA.layer < TURF_LAYER)

@@ -134,7 +134,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 // You might recognize these things as "fucking ridiculous to put in an appearance"
 // You'd be right, but that's fucking BYOND for you.
 /mob/dead/observer/proc/copy_appearance(mutable_appearance/COPY)
-	var/mutable_appearance/MA = new(src)
+	var/mutable_appearance/MA = new /mutable_appearance(src)
 
 	MA.appearance_flags = COPY.appearance_flags
 	MA.blend_mode = COPY.blend_mode

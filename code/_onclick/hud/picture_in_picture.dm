@@ -35,7 +35,7 @@
 		set_view_size(width-1, height-1)
 
 /obj/screen/movable/pic_in_pic/proc/make_backgrounds()
-	standard_background = new /mutable_appearance()
+	standard_background = new /mutable_appearance
 	standard_background.icon = 'icons/misc/pic_in_pic.dmi'
 	standard_background.icon_state = "background"
 	standard_background.layer = SPACE_LAYER
@@ -43,7 +43,7 @@
 /obj/screen/movable/pic_in_pic/proc/add_buttons()
 	var/static/mutable_appearance/move_tab
 	if(!move_tab)
-		move_tab = new /mutable_appearance()
+		move_tab = new /mutable_appearance
 		//all these properties are always the same, and since adding something to the overlay
 		//list makes a copy, there is no reason to make a new one each call
 		move_tab.icon = 'icons/misc/pic_in_pic.dmi'
@@ -56,7 +56,7 @@
 
 	if(!button_x)
 		button_x = new /obj/screen/component_button(null, src)
-		var/mutable_appearance/MA = new /mutable_appearance()
+		var/mutable_appearance/MA = new /mutable_appearance
 		MA.name = "close"
 		MA.icon = 'icons/misc/pic_in_pic.dmi'
 		MA.icon_state = "x"
@@ -69,7 +69,7 @@
 
 	if(!button_expand)
 		button_expand = new /obj/screen/component_button(null, src)
-		var/mutable_appearance/MA = new /mutable_appearance()
+		var/mutable_appearance/MA = new /mutable_appearance
 		MA.name = "expand"
 		MA.icon = 'icons/misc/pic_in_pic.dmi'
 		MA.icon_state = "expand"
@@ -82,7 +82,7 @@
 
 	if(!button_shrink)
 		button_shrink = new /obj/screen/component_button(null, src)
-		var/mutable_appearance/MA = new /mutable_appearance()
+		var/mutable_appearance/MA = new /mutable_appearance
 		MA.name = "shrink"
 		MA.icon = 'icons/misc/pic_in_pic.dmi'
 		MA.icon_state = "shrink"
