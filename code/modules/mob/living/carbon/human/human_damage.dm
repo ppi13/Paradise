@@ -341,3 +341,22 @@ This function restores all organs.
 
 /mob/living/carbon/human/apply_damage(damage = 0, damagetype = BRUTE, def_zone, blocked = 0, sharp = FALSE, obj/used_weapon, spread_damage = FALSE)
 	return dna.species.apply_damage(damage, damagetype, def_zone, blocked, src, sharp, used_weapon, spread_damage)
+
+/mob/living/carbon/human/proc/stubbed(obj/structure/table/T, mob/living/carbon/human/H)
+	var/pain = 0
+	var/quantifiable = 0
+	pain = rand(1, 6)
+	to_chat(H, "<span class='warning'>You stub your toe on [T]!</span>")
+	H.visible_message("[H] stubs their toe on [T].")
+	H.emote("scream")
+	H.apply_damage(2*pain, BRUTE, def_zone = pick(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT))
+	H.adjustStaminaLoss(10*pain)
+	H.overlay_fullscreen("brute", /obj/screen/fullscreen/brute, pain)
+	if(pain > 3)
+		quantifiable = pain
+	if(pain == 6)
+		playsound(H, "bonebreak", 150, 1)
+	H.vomit(5*pain, quantifiable, TRUE, 0, 1)
+	H.Weaken(pain)
+	message_admins("[key_name(H)] stubbed their toe on [T] with a severity of [pain]")
+	log_admin("[key_name(H)] stubbed their toe on [T] with a severity of [pain]")

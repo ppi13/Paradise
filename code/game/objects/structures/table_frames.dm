@@ -20,6 +20,7 @@
 	max_integrity = 100
 	var/framestack = /obj/item/stack/rods
 	var/framestackamount = 2
+	var/stubdown = 0
 
 /obj/structure/table_frame/attackby(obj/item/I, mob/user, params)
 	if(!try_make_table(I, user))
@@ -67,6 +68,14 @@
 /obj/structure/table_frame/deconstruct(disassembled = TRUE)
 	new framestack(get_turf(src), framestackamount)
 	qdel(src)
+
+/obj/structure/table/Bumped(mob/living/carbon/human/H)
+	. = ..()
+	if(!istype(H) || H.shoes || H.stat == DEAD || IS_HORIZONTAL(H) || !H.mind)
+		return
+	if(prob(5))
+		INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, stubbed), src, H)
+		//stubdown = world.time + 60 SECONDS stubdown >= world.time
 
 /obj/structure/table_frame/narsie_act()
 	new /obj/structure/table_frame/wood(loc)
