@@ -578,7 +578,7 @@ GLOBAL_LIST_INIT(cloner_biomass_items, list(\
 	QDEL_LIST_CONTENTS(missing_organs)
 
 	H.setCloneLoss(CLONE_INITIAL_DAMAGE, FALSE)
-	H.setBrainLoss(BRAIN_INITIAL_DAMAGE)
+	H.setBrainLoss(BRAIN_INITIAL_DAMAGE, use_brain_mod = FALSE)
 
 	for(var/o in H.internal_organs)
 		var/obj/item/organ/O = o
